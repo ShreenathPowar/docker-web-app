@@ -10,8 +10,8 @@ jobs:
     steps:
       - name: Build Docker Image
         run: |
-          docker build -t TESTIMAGE -f Dockerfile.dev .
+          docker build -t testimage -f Dockerfile.dev .
 
       - name: Run tests using built image
         run: |
-          docker run -e CI=true TESTIMAGE npm run test -- --coverage
+          docker run -e CI=true testimage npm run test -- --coverage
