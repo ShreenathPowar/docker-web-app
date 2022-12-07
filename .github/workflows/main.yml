@@ -6,7 +6,7 @@ on:
 
 jobs:
   test-docker-react-app:
-    runs-on: docker_latest
+    runs-on: ubuntu_latest
     steps:
       - name: Build Docker Image
         run: |
