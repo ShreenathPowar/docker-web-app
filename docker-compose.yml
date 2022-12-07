@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    # syntax to change default Dockerfile location and name
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:3000"
+    # first element is volume bookmarking for node_modules
+    # second element is map current directory to /apps in container
+    volumes:
+      - /apps/node_modules
+      - .:/apps
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /apps/node_modules
+      - .:/apps
+    command: ["npm", "run", "test"]

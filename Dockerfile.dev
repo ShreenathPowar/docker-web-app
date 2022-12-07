@@ -1,0 +1,23 @@
+FROM node:16-alpine
+
+# create '/apps' directory as root user and set owership
+# permission for node user.
+RUN mkdir -p /apps && \
+    chown node /apps
+
+# use user: 'node' (user already exists in node container).
+USER node
+WORKDIR '/apps'
+
+# inline chown commands will set ownership of the files
+# we are copying from our local environment to the node user
+# in the container.
+COPY --chown=node:node package.json .
+RUN npm install
+
+COPY --chown=node:node . .
+
+# default command when container starts
+# as this is developement Dockerfile,
+# we are running npm run start
+CMD npm run start
