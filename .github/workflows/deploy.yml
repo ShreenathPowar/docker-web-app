@@ -1,0 +1,32 @@
+name: Deploy Workflow
+
+on:
+  workflow_run:
+    workflows:
+      - Integration Workflow
+    branches:
+      - master
+    types:
+      - completed
+
+jobs:
+  deploy:
+    name: Deploy React App on AWS Cloud
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*'
+
+      - name: Deploy react app
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: docker-react
+          environment_name: Dockerreact-env
+          version_label: 12345
+          region: ap-south-1
+          deployment_package: deploy.zip

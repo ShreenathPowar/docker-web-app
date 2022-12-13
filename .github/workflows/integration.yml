@@ -13,8 +13,11 @@ jobs:
     name: Build and Test React Apps using Docker
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
       - name: Build docker image
         run: docker build -t testimage -f Dockerfile.dev .
+
       - name: Run tests using docker image
         run: docker run -e CI=true testimage npm run test -- --coverage
