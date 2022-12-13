@@ -9,20 +9,12 @@ on:
       - master
 
 jobs:
-  build-docker-react-app:
-    name: A job to build docker image of react app
+  build-test:
+    name: Build and Test React Apps using Docker
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build Docker Image
+      - name: Build docker image
         run: docker build -t testimage -f Dockerfile.dev .
-
-  test-docker-react-app:
-    name: A job to run tests in created docker image for react app
-    needs:
-      - build-docker-react-app
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Test Docker Image
+      - name: Run tests using docker image
         run: docker run -e CI=true testimage npm run test -- --coverage
