@@ -19,6 +19,8 @@ jobs:
 
   test-docker-react-app:
     name: A job to run tests in created docker image for react app
+    needs:
+      - build-docker-react-app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
