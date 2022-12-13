@@ -14,4 +14,5 @@ RUN npm run build
 # created build dir from builder stage into
 # /use/share/nginx/html
 FROM nginx
+EXPOSE 80
 COPY --from=builder /apps/build /usr/share/nginx/html
