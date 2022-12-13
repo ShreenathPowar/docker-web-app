@@ -10,14 +10,14 @@ on:
 
 jobs:
   build-test:
-    name: Build and Test React Apps using Docker
+    name: Build and Test React App
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
 
-      - name: Build docker image
+      - name: Build Docker image
         run: docker build -t testimage -f Dockerfile.dev .
 
-      - name: Run tests using docker image
+      - name: Run Jest tests
         run: docker run -e CI=true testimage npm run test -- --coverage
