@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          learn react
+          learn the best frontend library ever exists
         </a>
       </header>
     </div>
